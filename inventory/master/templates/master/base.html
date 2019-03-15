@@ -1,0 +1,168 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Title</title>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.4/css/mdb.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="{% static 'master/main.css' %}">
+</head>
+<body class="grey lighten-3">
+  <header>
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light deep-purple accent-4 scrolling-navbar">
+      <div class="container-fluid">
+        {% if user.is_master %}
+        <a class="navbar-brand waves-effect" href="{% url 'master-dashboard' %}">
+        {% else %}
+        <a class="navbar-brand waves-effect" href="{% url 'employee-dashboard' %}">
+        {% endif %}
+          <strong class="white-text">Inventory App</strong>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon white-text"></span>
+        </button>
+        {% block navbar %}
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link waves-effect white-text" href="#">Home
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link waves-effect white-text" href="#">My Orders</a>
+            </li>
+          </ul>
+          <ul class="navbar-nav nav-flex-icons">
+            {% if user.is_authenticated %}
+            <li class="nav-item mr-2">
+                {% if user.is_employee %}
+                <a href="{% url 'master-profile' pk=user.id %}" class="nav-link waves-effect white-text">
+                    <i class="fas fa-user-circle mr-2"></i>Profile
+                </a>
+                {% endif %}
+            </li>
+            <li class="nav-item mr-2">
+                <a href="#" class="nav-link waves-effect white-text">
+                    <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                </a>
+            </li>
+            {% else %}
+            <li class="nav-item mr-2">
+              <a href="#" class="nav-link border border-light rounded waves-effect white-text">
+                  <i class="fas fa-sign-in-alt mr-2"></i>Sign In
+              </a>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+        {% endblock %}
+
+      </div>
+    </nav>
+    {% block sidenav %}
+    <div class="sidebar-fixed position-fixed">
+      <a class="logo-wrapper waves-effect">
+        <img src="https://mdbootstrap.com/img/logo/mdb-email.png" class="img-fluid" alt="">
+      </a>
+      <div class="list-group list-group-flush">
+        {% if user.is_master %}
+        <a href="{% url 'master-dashboard' %}" class="list-group-item active deep-purple darken-4 waves-effect white-text">
+        {% else %}
+        <a href="{% url 'employee-dashboard' %}" class="list-group-item active deep-purple darken-4 waves-effect white-text">
+        {% endif %}
+          <i class="fas fa-chart-pie mr-3"></i>Dashboard
+        </a>
+        {% if user.is_authenticated and user.is_master %}
+        <a href="#" class="list-group-item list-group-item-action waves-effect">
+            <i class="fas fa-user mr-3"></i>User</a>
+        <a href="#" class="list-group-item list-group-item-action waves-effect">
+          <i class="fas fa-user mr-3"></i>Category</a>
+        <a href="#" class="list-group-item list-group-item-action waves-effect">
+          <i class="fas fa-table mr-3"></i>Brand</a>
+        <a href="#" class="list-group-item list-group-item-action waves-effect">
+          <i class="fas fa-map mr-3"></i>Product</a>
+        {% endif %}
+        <a href="#" class="list-group-item list-group-item-action waves-effect">
+          <i class="fas fa-cash-register mr-2"></i>Order</a>
+      </div>
+    </div>
+    {% endblock %}
+  </header>
+  <main class="pt-5 mx-lg-5">
+    	<div class="container-fluid mt-5">
+        {% block insidenav %}
+		    <div class="card mb-4 wow fadeIn">
+        		<div class="card-body d-sm-flex justify-content-between">
+					<h4 class="mb-2 mb-sm-0 pt-1">
+						<a href="#">{{my_model}}</a>
+						<span>/</span>
+						<span>Management</span>
+					</h4>
+					<form class="d-flex justify-content-center">
+						<input type="search" placeholder="Type your query" aria-label="Search" class="form-control">
+						<button class="btn btn-primary btn-sm my-0 p" type="submit">
+						<i class="fas fa-search"></i>
+						</button>
+					</form>
+				</div>
+      </div>
+      {% endblock %}
+			<div class="row">
+        <div class="col-md-12">
+            {% if messages %}
+            {% for message in messages %}
+              <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+        </div>
+        {% block content %}
+        {% endblock %}
+			</div>
+    </div>
+  	</main>
+	<footer class="page-footer text-center font-small deep-purple accent-4 mt-4 wow fadeIn fixed-bottom">
+		<div class="footer-copyright py-3">
+		© 2019 Copyright:
+		<a href="#">Turaboy Holmirzaev</a>
+		</div>
+	</footer>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.4/js/mdb.min.js"></script>
+	<script type="text/javascript">
+		new WOW().init();
+  </script>
+  <script>
+    $('#add_more').click(function() {
+          cloneMore('div.table:last', 'service');
+      });
+    function cloneMore(selector, type) {
+    var newElement = $(selector).clone(true);
+    var total = $('#id_' + type + '-TOTAL_FORMS').val();
+    newElement.find(':input').each(function() {
+        var name = $(this).attr('name').replace('-' + (total-1) + '-','-' + total + '-');
+        var id = 'id_' + name;
+        $(this).attr({'name': name, 'id': id}).val('').removeAttr('checked');
+    });
+    newElement.find('label').each(function() {
+        var newFor = $(this).attr('for').replace('-' + (total-1) + '-','-' + total + '-');
+        $(this).attr('for', newFor);
+    });
+    total++;
+    $('#id_' + type + '-TOTAL_FORMS').val(total);
+    $(selector).after(newElement);
+}
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+{% extends "master/base.html" %}
+{% load crispy_forms_tags %}
+{% block sidenav %}
+
+{% endblock %}
+{% block insidenav %}
+
+{% endblock %}
+{% block content %}
+<div class="col-md-1"></div>
+<div class="col-md-8">
+        <div class="card my-4">
+                <h5 class="card-header deep-purple accent-4 white-text py-4">
+                    <strong>You have been logged out</strong>
+                </h5>
+                <div class="card-body px-lg-5 pt-0">
+                    <small class="text-muted">
+                        <a href="{% url 'login' %}">Log In Again</a>
+                    </small>
+                </div>
+            </div>
+</div>
+<div class="col-md-2"></div>
+{% endblock %}

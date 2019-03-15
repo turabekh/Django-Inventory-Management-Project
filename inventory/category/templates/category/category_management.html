@@ -1,0 +1,65 @@
+{% extends "master/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block navbar %}
+    {% include "master/_navbar.html" %}
+{% endblock %}
+{% block content %}
+    <div class="col-md-12">
+        <!-- Editable table -->
+<div class="card">
+        <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Categories List</h3>
+        <div class="card-body">
+          <div id="table" class="table-editable">
+            <span class="table-add float-right mb-3 mr-2"><a href="#!" id="add-employee" class="text-success" data-toggle="modal" data-target="#add-emp-modal"><span class="h4 mr-2 pb-5">Add Category</span><i class="fas fa-plus fa-2x"
+                  aria-hidden="true"></i></a></span>
+            <table class="table table-bordered table-responsive-md table-striped text-center">
+              <tr>
+                <th class="text-center">ID</th>
+                <th class="text-center">Category Name</th>
+                <th class="text-center">Status</th>
+                <th class="text-center">Edit</th>
+                <th class="text-center">Activate/Deactivate</th>
+              </tr>
+              {% for category in categories %}
+                {% include "category/_category.html" %}
+              {% endfor %}
+            </table>
+          </div>
+        </div>
+      </div>
+      <!-- Editable table -->
+    </div>
+
+<div class="modal fade right" id="add-emp-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+
+
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="card-header deep-purple accent-4 w-100 white-text py-4">
+            <strong>Add Category</strong>
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+            <div class="card my-4">
+                    <div class="card-body px-lg-5 pt-0">
+                        <form class="my-4" style="color: #757575;" method="POST">
+                                {% csrf_token %}
+                                {{ form|crispy }}
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn register-btn">Add Category</button>
+                                </div>
+                        </form>
+                    </div>
+                </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

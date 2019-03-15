@@ -1,0 +1,14 @@
+<tr>
+        <td class="pt-3-half">{{ order_line.id }}</td>
+        <td class="pt-3-half"> {{ order_line.customer_name}} </td>
+        <td class="pt-3-half">{{ order_line.total }}</td>
+        <td class="pt-3-half">{{ order_line.payment_status }}</td>
+        <td class="pt-3-half">{{ order_line.delivery_date }}</td>
+        <td class="pt-3-half"> {% if order_line.status %} <span class="text-success">Active</span> {% else %} <span class="text-danger">Not Active</span> {% endif %}</td>
+        <td>
+            <span class="table-remove"><a href="#" type="button" class="btn btn-info btn-rounded btn-sm my-0">Edit</a></span>
+        </td>
+        <td>
+            <span class="table-remove"><a href="{% url 'order-handle' pk=order_line.id %}" type="button" class="btn btn-danger btn-rounded btn-sm my-0">Activate / Deactivate</a></span>
+        </td>
+    </tr>

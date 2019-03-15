@@ -1,0 +1,28 @@
+{% extends "master/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block navbar %}
+    {% include "master/_navbar.html" %}
+{% endblock %}
+
+
+{% block insidenav %}
+{% endblock %}
+{% block content %}
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+            <div class="card my-4">
+                    <h5 class="card-header deep-purple accent-4 white-text py-4">
+                        <strong>Update Employee Profile</strong>
+                    </h5>
+                    <div class="card-body px-lg-5 pt-0">
+                        <form class="my-4" style="color: #757575;" method="POST">
+                                {% csrf_token %}
+                                {{ form|crispy }}
+                            <button class="btn register-btn dark-text btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Update</button>
+                        </form>
+                    </div>
+                </div>
+    </div>
+    <div class="col-md-2"></div>
+{% endblock %}

@@ -1,0 +1,16 @@
+<tr>
+    <td class="pt-3-half">{{ product.id }}</td>
+    <td class="pt-3-half"> {{ product.category.name}} </td>
+    <td class="pt-3-half">{{ product.brand.name }}</td>
+    <td class="pt-3-half">{{ product.name }}</td>
+    <td class="pt-3-half">{{ product.quantity }} {{product.unit}}</td>
+    <td class="pt-3-half">{{ product.base_price }}</td>
+    <td class="pt-3-half">{{ product.created_by.username }}</td>
+    <td class="pt-3-half"> {% if product.status %} <span class="text-success">Active</span> {% else %} <span class="text-danger">Not Active</span> {% endif %}</td>
+    <td>
+        <span class="table-remove"><a href="{% url 'product-edit' pk=product.id %}" type="button" class="btn btn-info btn-rounded btn-sm my-0">Edit</a></span>
+    </td>
+    <td>
+        <span class="table-remove"><a href="{% url 'product-handle' pk=product.id %}" type="button" class="btn btn-danger btn-rounded btn-sm my-0">Activate / Deactivate</a></span>
+    </td>
+</tr>

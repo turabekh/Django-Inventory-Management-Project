@@ -1,0 +1,12 @@
+<tr>
+    <td class="pt-3-half">{{ brand.id }}</td>
+    <td class="pt-3-half"> {{ brand.category.name}} </td>
+    <td class="pt-3-half">{{ brand.name }}</td>
+    <td class="pt-3-half"> {% if brand.status %} <span class="text-success">Active</span> {% else %} <span class="text-danger">Not Active</span> {% endif %}</td>
+    <td>
+        <span class="table-remove"><a href="{% url 'brand-edit' pk=brand.id %}" type="button" class="btn btn-info btn-rounded btn-sm my-0">Edit</a></span>
+    </td>
+    <td>
+        <span class="table-remove"><a href="{% url 'brand-handle' pk=brand.id %}" type="button" class="btn btn-danger btn-rounded btn-sm my-0">Activate / Deactivate</a></span>
+    </td>
+</tr>

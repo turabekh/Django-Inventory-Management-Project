@@ -1,0 +1,11 @@
+<tr>
+        <td class="pt-3-half">{{ category.id }}</td>
+        <td class="pt-3-half"> {{ category.name }} </td>
+        <td class="pt-3-half"> {% if category.status %} <span class="text-success">Active</span> {% else %} <span class="text-danger">Not Active</span> {% endif %}</td>
+        <td>
+            <span class="table-remove"><a href="{% url 'category-edit' pk=category.id %}" type="button" class="btn btn-info btn-rounded btn-sm my-0">Edit</a></span>
+        </td>
+        <td>
+            <span class="table-remove"><a href="{% url 'category-handle' pk=category.id %}" type="button" class="btn btn-danger btn-rounded btn-sm my-0">Activate / Deactivate</a></span>
+        </td>
+    </tr>
