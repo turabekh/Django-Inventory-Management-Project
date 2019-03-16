@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>Title</title>
+  <title>Inventory App</title>
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.4/css/mdb.min.css" rel="stylesheet">
@@ -31,12 +31,12 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link waves-effect white-text" href="#">Home
+              <a class="nav-link waves-effect white-text" href="{% url 'employee-dashboard' %}">Home
                 <span class="sr-only">(current)</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link waves-effect white-text" href="#">My Orders</a>
+              <a class="nav-link waves-effect white-text" href="{% url 'order-management' %}">My Orders</a>
             </li>
           </ul>
           <ul class="navbar-nav nav-flex-icons">
@@ -49,13 +49,13 @@
                 {% endif %}
             </li>
             <li class="nav-item mr-2">
-                <a href="#" class="nav-link waves-effect white-text">
+                <a href="{% url 'logout' %}" class="nav-link waves-effect white-text">
                     <i class="fas fa-sign-out-alt mr-2"></i>Logout
                 </a>
             </li>
             {% else %}
             <li class="nav-item mr-2">
-              <a href="#" class="nav-link border border-light rounded waves-effect white-text">
+              <a href="{% url 'login' %}" class="nav-link border border-light rounded waves-effect white-text">
                   <i class="fas fa-sign-in-alt mr-2"></i>Sign In
               </a>
             </li>
@@ -68,8 +68,12 @@
     </nav>
     {% block sidenav %}
     <div class="sidebar-fixed position-fixed">
-      <a class="logo-wrapper waves-effect">
-        <img src="https://mdbootstrap.com/img/logo/mdb-email.png" class="img-fluid" alt="">
+      {% if user.is_master %}
+      <a class="logo-wrapper waves-effect" href="{% url 'master-dashboard' %}">
+      {% else %}
+      <a class="logo-wrapper waves-effect" href="{% url 'master-dashboard' %}">
+      {% endif %}
+        <img src="{% static 'master/logo.png' %}" class="img-fluid" alt="">
       </a>
       <div class="list-group list-group-flush">
         {% if user.is_master %}
@@ -80,24 +84,27 @@
           <i class="fas fa-chart-pie mr-3"></i>Dashboard
         </a>
         {% if user.is_authenticated and user.is_master %}
-        <a href="#" class="list-group-item list-group-item-action waves-effect">
+        <a href="{% url 'user-management' %}" class="list-group-item list-group-item-action waves-effect">
             <i class="fas fa-user mr-3"></i>User</a>
-        <a href="#" class="list-group-item list-group-item-action waves-effect">
+        <a href="{% url 'category-management' %}" class="list-group-item list-group-item-action waves-effect">
           <i class="fas fa-user mr-3"></i>Category</a>
-        <a href="#" class="list-group-item list-group-item-action waves-effect">
+        <a href="{% url 'brand-management' %}" class="list-group-item list-group-item-action waves-effect">
           <i class="fas fa-table mr-3"></i>Brand</a>
-        <a href="#" class="list-group-item list-group-item-action waves-effect">
+        <a href="{% url 'product-management' %}" class="list-group-item list-group-item-action waves-effect">
           <i class="fas fa-map mr-3"></i>Product</a>
         {% endif %}
-        <a href="#" class="list-group-item list-group-item-action waves-effect">
+        {% if user.is_authenticated %}
+        <a href="{% url 'order-management' %}" class="list-group-item list-group-item-action waves-effect">
           <i class="fas fa-cash-register mr-2"></i>Order</a>
       </div>
+        {% endif %}
     </div>
     {% endblock %}
   </header>
   <main class="pt-5 mx-lg-5">
     	<div class="container-fluid mt-5">
         {% block insidenav %}
+        {% if user.is_authenticated %}
 		    <div class="card mb-4 wow fadeIn">
         		<div class="card-body d-sm-flex justify-content-between">
 					<h4 class="mb-2 mb-sm-0 pt-1">
@@ -113,6 +120,7 @@
 					</form>
 				</div>
       </div>
+      {% endif %}
       {% endblock %}
 			<div class="row">
         <div class="col-md-12">

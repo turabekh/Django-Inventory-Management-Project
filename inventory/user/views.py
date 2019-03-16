@@ -22,3 +22,4 @@ def login_success(request):
         return redirect("master-dashboard")
     else:
         return redirect("employee-dashboard")
+

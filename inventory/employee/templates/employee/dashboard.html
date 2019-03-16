@@ -1,5 +1,26 @@
 {% extends "master/base.html" %}
 
 {% block content %}
-    <h1>Employee Home page</h1>
+<div class="col-md-12 mt-3">
+    <div class="card-group">
+        <div class="card border-primary mb-3 mr-3" style="max-width: 30 rem;">
+            <div class="card-header">Total Order Value</div>
+            <div class="card-body text-primary text-center">
+                <h5>{{total}}</h5>
+            </div>
+        </div>
+        <div class="card border-primary mb-3 mr-3" style="max-width: 30rem;">
+            <div class="card-header">Total Cash Order Value</div>
+            <div class="card-body text-primary text-center">
+                <h5>{{cash}}</h5>
+            </div>
+        </div>
+        <div class="card border-primary mb-3 mr-3" style="max-width: 30rem;">
+            <div class="card-header">Total Credit Order Value</div>
+            <div class="card-body text-primary text-center">
+                <h5>{{credit}}</h5>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

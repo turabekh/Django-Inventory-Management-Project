@@ -3,44 +3,78 @@
     {% include "master/_navbar.html" %}
 {% endblock %}
 {% block content %}
-    <div class="col-md-12">
-        <div class="card-group">
-            <div class="card border-primary mb-3 mr-3" style="max-width: 20rem;">
-                <div class="card-header">Total User</div>
+<div class="col-md-12">
+    <div class="row">
+        <div class="card-group col-md-12">
+            <div class="card border-primary mb-3 mr-3" style="max-width: 30rem;">
+                <div class="card-header">Total Employees</div>
                 <div class="card-body text-primary text-center">
-                    <h5>7</h5>
+                    <h5>{{employees}}</h5>
                 </div>
             </div>
-            <div class="card border-primary mb-3 mr-3" style="max-width: 20rem;">
-                    <div class="card-header">Total User</div>
-                    <div class="card-body text-primary text-center">
-                        <h5>7</h5>
-                    </div>
+            <div class="card border-primary mb-3 mr-3" style="max-width: 30rem;">
+                <div class="card-header">Total Categories</div>
+                <div class="card-body text-primary text-center">
+                    <h5>{{categories}}</h5>
                 </div>
-                <div class="card border-primary mb-3 mr-3" style="max-width: 20rem;">
-                        <div class="card-header">Total User</div>
-                        <div class="card-body text-primary text-center">
-                            <h5>7</h5>
-                        </div>
-                    </div>
-                    <div class="card border-primary mb-3 mr-3" style="max-width: 20rem;">
-                            <div class="card-header">Total User</div>
-                            <div class="card-body text-primary text-center">
-                                <h5>7</h5>
-                            </div>
-                        </div>
-                        <div class="card border-primary mb-3 mr-3" style="max-width: 20rem;">
-                                <div class="card-header">Total User</div>
-                                <div class="card-body text-primary text-center">
-                                    <h5>7</h5>
-                                </div>
-                            </div>
-                            <div class="card border-primary mb-3 mr-3" style="max-width: 20rem;">
-                                    <div class="card-header">Total User</div>
-                                    <div class="card-body text-primary text-center">
-                                        <h5>7</h5>
-                                    </div>
-                                </div>
+            </div>
+            <div class="card border-primary mb-3 mr-3" style="max-width: 30rem;">
+                <div class="card-header">Total Brands</div>
+                <div class="card-body text-primary text-center">
+                    <h5>{{brands}}</h5>
+                </div>
+            </div>
+            <div class="card border-primary mb-3 mr-3" style="max-width: 30rem;">
+                <div class="card-header">Total Item in Stock</div>
+                <div class="card-body text-primary text-center">
+                    <h5>{{products}}</h5>
+                </div>
+            </div>
         </div>
     </div>
+    <div class="row">
+        <div class="card-group col-md-12">
+            <div class="card border-primary mb-3 mr-3" style="max-width: 30rem;">
+                <div class="card-header">Total Order Value</div>
+                <div class="card-body text-primary text-center">
+                    <h5>{{total}}</h5>
+                </div>
+            </div>
+            <div class="card border-primary mb-3 mr-3" style="max-width: 30rem;">
+                <div class="card-header">Total Cash Order Value</div>
+                <div class="card-body text-primary text-center">
+                    <h5>{{cash}}</h5>
+                </div>
+            </div>
+            <div class="card border-primary mb-3 mr-3" style="max-width: 30rem;">
+                <div class="card-header">Total Credit Order Value</div>
+                <div class="card-body text-primary text-center">
+                    <h5>{{credit}}</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-md-12">
+            <div class="card">
+                <h6 class="card-header text-left font-weight-bold text-uppercase py-4">Total Order Value by Employee</h6>
+                <div class="card-body">
+                    <div id="table" class="table-editable">
+                    <table class="table table-bordered table-responsive-md table-striped text-center">
+                        <tr>
+                            <th class="text-center">User Name</th>
+                            <th class="text-center">Total Order Value</th>
+                            <th class="text-center">Total Cash Order</th>
+                            <th class="text-center">Total Credit Order</th>
+                        </tr>
+                        {% for result in results %}
+                            {% include "master/_result.html" %}
+                        {% endfor %}
+                    </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

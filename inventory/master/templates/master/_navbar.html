@@ -1,20 +1,21 @@
 <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link waves-effect white-text" href="#">Dashbaord
+        {% if user.is_master %}
+        <a class="nav-link waves-effect white-text" href="{% url 'master-dashboard' %}">Dashbaord
           <span class="sr-only">(current)</span>
         </a>
+        {% else %}
+        <a class="nav-link waves-effect white-text" href="{% url 'order-management' %}">My Orders
+            <span class="sr-only">(current)</span>
+        </a>
+        {% endif %}
       </li>
     </ul>
     <ul class="navbar-nav nav-flex-icons">
       {% if user.is_authenticated %}
       <li class="nav-item mr-2">
-          <a href="#" class="nav-link waves-effect white-text">
-              <i class="fas fa-user-circle mr-2"></i>Profile
-          </a>
-      </li>
-      <li class="nav-item mr-2">
-          <a href="#" class="nav-link waves-effect white-text">
+          <a href="{% url 'logout' %}" class="nav-link waves-effect white-text">
               <i class="fas fa-sign-out-alt mr-2"></i>Logout
           </a>
       </li>

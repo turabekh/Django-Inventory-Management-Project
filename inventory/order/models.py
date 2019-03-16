@@ -7,13 +7,17 @@ PAYMENT = [("cash", "CASH"), ("credit", "CREDIT"),]
 
 class OrderLine(models.Model):
     customer_name = models.CharField(max_length=255)
-    address = models.TextField()
+    address = models.CharField(max_length=255)
     delivery_date = models.DateField()
     total = models.DecimalField(max_digits=10, decimal_places=2)    
     payment_status = models.CharField(max_length=30, choices=PAYMENT)
     status = models.BooleanField()
     created_at = models.DateTimeField(auto_now=True)
     employee = models.ForeignKey(User, on_delete=models.CASCADE, default=4)
+
+    def __str__(self):
+        return f"Orderline - {self.id}"
+
 
 class Order(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
@@ -22,5 +26,6 @@ class Order(models.Model):
     tax = models.DecimalField(max_digits=4, decimal_places=2)
     order_lines = models.ManyToManyField(OrderLine)
 
-
+    def __str__(self):
+        return f"Order - {self.id}"
 
